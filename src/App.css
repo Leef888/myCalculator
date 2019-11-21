@@ -1,0 +1,57 @@
+.container {
+  text-align: center;
+  width: 250px;
+  height: 400px;
+  background-color: darkred;
+  margin-left: 45%;
+  margin-top: 7%;
+  display: grid;
+  grid-template-areas: 
+  "c c"
+  "r r"
+  "n op";
+    grid-template-rows: 40px 30px 330px;
+      grid-template-columns: 180px 70px;
+        grid-gap: 0px;
+}
+
+.resultText {
+  font-size: 30;
+  color: black;
+  text-align: end;
+  margin: 0px;
+}
+
+.calculationText {
+  font-size: 24;
+  color: black;
+  text-align: end;
+  margin: 0px;
+}
+
+.result {
+  background-color: rgb(235, 227, 227);
+  grid-area: r;
+}
+
+.calculation {
+  background-color: rgb(235, 227, 227);
+  grid-area: c;
+}
+
+.numbers {
+  background-color: grey;
+  grid-area: n;
+}
+
+.operations {
+  background-color: grey;
+  grid-area: op;
+}
+
+.row {
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+}
