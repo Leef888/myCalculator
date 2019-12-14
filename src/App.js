@@ -1,102 +1,95 @@
 import React from 'react';
 import './App.css';
+import Button from './components/button';
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      resultText: "",
-      calculationText: ""
-    }
-    this.operations = ['del', '+', '-', '*', '/']
-  }
-
-  calculateResult() {
-    const text = this.state.resultText
-    this.setState({
-      calculationText: eval(text)
-    })
-  }
-
-  validate() {
-    const text = this.state.resultText
-    switch (text.slice(-1)) {
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-        return false
-    }
-    return true
-  }
-
-  buttonPressed(text) {
-    if (text === "=") {
-      return this.validate() && this.calculateResult()
-    }
-
-    this.setState({
-      resultText: this.state.resultText + text
-    })
-  }
-
-  operate(operation) {
-    switch (operation) {
-      case 'del':
-        let text = this.state.resultText.split('')
-        text.pop()
-        this.setState({
-          resultText: text.join('')
-        })
-        break
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-        const lastChar = this.state.resultText.split('').pop()
-
-        if (this.operations.indexOf(lastChar) > 0) return
-
-        if (this.state.text === "") return
-        this.setState({
-          resultText: this.state.resultText + operation
-        })
-    }
-  }
-
+export default class App extends React.Component {
   render() {
-    let rows = []
-    let nums = [[7, 8, 9], [4, 5, 6], [1, 2, 3], [".", 0, "="]]
-    for (let i = 0; i < 4; i++) {
-      let row = [];
-      for (let j = 0; j < 3; j++) {
-        row.push(<div><button onClick={() => this.buttonPressed(nums[i][j])}>{nums[i][j]}</button></div>)
-      }
-      rows.push(<div>{row}</div>)
+    let buttons = [
+      { name: "+", action: "operator" },
+      { name: "-", action: "operator" },
+      { name: "*", action: "operator" },
+      { name: "/", action: "operator" },
+      { name: "7", action: "number" },
+      { name: "8", action: "number" },
+      { name: "9", action: "number" },
+      { name: "4", action: "number" },
+      { name: "5", action: "number" },
+      { name: "6", action: "number" },
+      { name: "1", action: "number" },
+      { name: "2", action: "number" },
+      { name: "3", action: "number" },
+      { name: ".", action: "decimate" },
+      { name: "0", action: "number" },
+      { name: "AC", action: "allClear" },
+      { name: "=", action: "equal" }
+    ]
+    
+    let thisValue = "";
+
+    let newValue = "";
+
+    let operatorsValue = "";
+
+    let calculationText = []; 
+
+    let screenRef = React.createRef()
+
+    let allClearButton = () => {
+      calculationText = []
     }
 
-    let ops = []
-    for (let i = 0; i < 5; i++) {
-      ops.push(<div><button onClick={() => this.operate(this.operations[i])}>{this.operations[i]}</button></div>)
+    let saveValue = (text) => {
+      newValue = text;
+      calculationText.push(newValue);
     }
+
+    let addOperator = (text) => {
+      operatorsValue = text;
+      calculationText.push(operatorsValue);
+    }
+
+    let calculation = () => {
+      let text = calculationText[0] + calculationText[1] + calculationText[2];
+      let a = "+";
+      let b = "-";
+      let c = "*";
+      let d = "/";
+      let lastChar = calculationText.pop();
+      if (lastChar === a || lastChar === b || lastChar === c || lastChar === d) {
+        return calculationText.pop()
+      }
+      let text_2 = eval(text)
+      screenRef.current.value = text_2;
+    }
+
+    /*let calculation = (text) => {
+      thisValue = newValue;
+      text = thisValue + operatorsValue + newValue;
+      alert(text)
+    }*/
+
+    let updateInput = (text) => {
+      thisValue = text;
+    }
+
+    let inputChanged = () => {
+      let text = screenRef.current.value;
+      updateInput(text);
+    }
+
+    let numberButtons = buttons.map((n) => {
+      return (<Button className={n.action} buttonsName={n.name} allClearButton={allClearButton} thisValue={screenRef} saveValue={saveValue} addOperator={addOperator} calculation={calculation} />)
+    })
 
     return (
-      <div className="container">
-        <div className="calculation">
-          <h1 className="calculationText">{this.state.resultText}</h1>
+      <div className="calculator">
+        <div>
+          <input onChange={inputChanged} className="calculatorScreen" ref={screenRef} value={thisValue} />
         </div>
-        <div className="result">
-          <h2 className="resultText" type="text">{this.state.calculationText}</h2>
-        </div>
-        <div className="numbers">
-          {rows}
-        </div>
-        <div className="operations">
-          {ops}
+        <div>
+          <div className="allNumbers">{numberButtons}</div>
         </div>
       </div>
     );
   }
 }
-
-export default App;

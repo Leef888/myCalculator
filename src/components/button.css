@@ -1,0 +1,46 @@
+.operator {
+  width: 100%;
+  height: 60px;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+  font-size: 2rem;
+  color: #333;
+}
+
+.number {
+  width: 100%;
+  height: 60px;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+  font-size: 2rem;
+  color: #333;
+}
+
+.decimate {
+  width: 100%;
+  height: 60px;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+  font-size: 2rem;
+  color: #333;
+}
+
+.allClear {
+  width: 100%;
+  height: 60px;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+  font-size: 2rem;
+  color: #333;
+}
+
+.equal {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+  font-size: 2rem;
+  color: #333;
+  grid-row: 2 /6;
+  grid-column: 4 / 5;
+}

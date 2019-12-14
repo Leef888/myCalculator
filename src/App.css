@@ -1,57 +1,39 @@
-.container {
-  text-align: center;
-  width: 250px;
-  height: 400px;
-  background-color: darkred;
-  margin-left: 45%;
-  margin-top: 7%;
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.calculator {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+}
+
+.calculatorScreen {
+  width: 100%;
+  font-size: 5rem;
+  height: 80px;
+  border: none;
+  background-color: #252525;
+  color: #fff;
+  text-align: right;
+  padding-right: 20px;
+  padding-left: 10px;
+}
+
+.allNumbers {
   display: grid;
-  grid-template-areas: 
-  "c c"
-  "r r"
-  "n op";
-    grid-template-rows: 40px 30px 330px;
-      grid-template-columns: 180px 70px;
-        grid-gap: 0px;
-}
-
-.resultText {
-  font-size: 30;
-  color: black;
-  text-align: end;
-  margin: 0px;
-}
-
-.calculationText {
-  font-size: 24;
-  color: black;
-  text-align: end;
-  margin: 0px;
-}
-
-.result {
-  background-color: rgb(235, 227, 227);
-  grid-area: r;
-}
-
-.calculation {
-  background-color: rgb(235, 227, 227);
-  grid-area: c;
-}
-
-.numbers {
-  background-color: grey;
-  grid-area: n;
-}
-
-.operations {
-  background-color: grey;
-  grid-area: op;
-}
-
-.row {
-  flex-direction: row;
-  flex: 1;
-  justify-content: space-around;
-  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  padding: 20px;
 }
